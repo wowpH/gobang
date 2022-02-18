@@ -1,5 +1,5 @@
 <template>
-  <router-view></router-view>
+  <div>五子棋</div>
 </template>
 
 <script>

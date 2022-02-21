@@ -1,47 +1,40 @@
-// Returns a function, that, when invoked, will only be triggered at most once
-// during a given window of time. Normally, the throttled function will run
-// as much as it can, without ever going more than once per `wait` duration;
-// but if you'd like to disable the execution on the leading edge, pass
-// `{leading: false}`. To disable execution on the trailing edge, ditto.
-const _throttle = function (func, wait, options) {
-  var timeout, context, args, result
-  var previous = 0
-  if (!options) options = {}
-
-  var later = function () {
-    previous = options.leading === false ? 0 : _.now()
-    timeout = null
-    result = func.apply(context, args)
-    if (!timeout) context = args = null //显示地释放内存，防止内存泄漏
-  }
-
-  var throttled = function () {
-    var now = _.now()
-    if (!previous && options.leading === false) previous = now
-    var remaining = wait - (now - previous)
-    context = this
-    args = arguments
-    if (remaining <= 0 || remaining > wait) {
-      if (timeout) {
-        clearTimeout(timeout)
-        timeout = null
+export function createChess() {
+  let count = 0
+  let res = '{'
+  for (let a = 0; a < 4; a++) {
+    let s1 = String.fromCharCode(97 + a)
+    for (let j = 0; j < 4; j++) {
+      if (j == 3 && a == 3) {
+        continue
       }
-      previous = now
-      result = func.apply(context, args)
-      if (!timeout) context = args = null
-    } else if (!timeout && options.trailing !== false) {
-      timeout = setTimeout(later, remaining)
+      let s2 = s1 + String.fromCharCode(97 + j)
+      for (let k = 0; k < 4; k++) {
+        let ch3 = 'd'
+        if (a == 3 || j == 3) {
+          if (k == 3) {
+            continue
+          }
+          ch3 = String.fromCharCode(97 + k)
+        }
+        let s3 = s2 + ch3
+        for (let d = 0; d < 3; d++) {
+          let s4 = s3 + String.fromCharCode(97 + d)
+          for (let e = 0; e < 3; e++) {
+            let s5 = s4 + String.fromCharCode(97 + e)
+            if (res.indexOf(s5) == -1) {
+              res += '"'
+              res += s5
+              console.log(++count, s5)
+              res += '":1,'
+            }
+          }
+        }
+      }
     }
-    return result
   }
-
-  throttled.cancel = function () {
-    clearTimeout(timeout)
-    previous = 0
-    timeout = context = args = null
-  }
-
-  return throttled
+  res = res.slice(0, -1)
+  res += '}'
+  console.log(res)
+  let resJson = JSON.parse(res)
+  console.log(resJson)
 }
-
-export { _throttle }

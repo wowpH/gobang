@@ -10,15 +10,24 @@ export default {
 export const board = {
   minWidth: 200, // 棋盘最小宽度
   maxWidth: 1000, // 棋盘最大宽度
-  padding: 30, // 棋盘内边距
+  padding: 40, // 棋盘内边距
   lineWidth: 2, // 棋盘线宽度
 }
 
 export const player = {
   A: '1',
   B: '2',
+  C: '',
 }
 
 export const cursor = {
   interval: 300, // ms
+}
+
+/**
+ * 棋子图片
+ */
+export const chessImg = {
+  black: '@/assets/black.png',
+  white: '@/assets/white.png',
 }

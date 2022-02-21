@@ -22,6 +22,11 @@ const routes = [
         name: 'HumanComputerFighting',
         component: () => import('../views/HumanComputerFighting/index.vue'),
       },
+      {
+        path: '/ai-study',
+        name: 'AiStudy',
+        component: () => import('../views/AiStudy/index.vue'),
+      },
     ],
   },
 ]

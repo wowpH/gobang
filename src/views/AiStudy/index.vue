@@ -65,7 +65,7 @@
         <q-btn
           color="secondary"
           label="电脑落子"
-          :disable="!playing || player === firstPlayer"
+          :disable="!playing"
           @click="handleComputerMoveChess"
         />
       </div>
@@ -338,7 +338,6 @@ export default {
       { leading: true },
     ),
     handleComputerMoveChess() {
-      console.log('handleComputerMoveChess()')
       let pos = this.getPosition(this.player)
       let moveChess = new MoveChess(pos.x, pos.y, this.player)
       this.checkExistingChess(moveChess)
@@ -348,10 +347,6 @@ export default {
      */
     computerMoveChess() {
       if (this.computerAutomaticSwitch) {
-        console.log('this.weightA:')
-        console.table(this.weightA)
-        console.log('this.weightB:')
-        console.table(this.weightB)
         let pos = this.getPosition(this.player)
         let moveChess = new MoveChess(pos.x, pos.y, this.player)
         this.checkExistingChess(moveChess)
